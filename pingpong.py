@@ -7,19 +7,17 @@ wind.fill((0,0,255))
 game = True
 font.init()
 font1 = font.Font(None,50)
+rect = Rect(0,0,15,65)
 class GameSprite(sprite.Sprite):
-    def __init__(self,player_image,player_x,player_y,player_speed,player_l=15,player_w=65):
+    def __init__(self,player_x,player_y,player_speed,player_l=15,player_w=65):
         super().__init__()
-        self.image = transform.scale(image.load(player_image),(player_l,player_w))
         self.speed = player_speed
-        self.rect = self.image.get_rect()
-        self.rect.x = player_x
-        self.rect.y = player_y
+        self.rect =Rect(player_x,player_y,player_l,player_w)
     def reset(self):
-        wind.blit(self.image,(self.rect.x,self.rect.y))
+        draw(wind,(0,125,225),self.rect)
 class Player(GameSprite):
-    def __init__(self,player_image,player_x,player_y,player_speed,KUP,KDOWN,player_l=15,player_w=65):
-        super().__init__(self,player_image,player_x,player_y,player_speed,player_l,player_w)
+    def __init__(self,player_x,player_y,player_speed,KUP,KDOWN,player_l=15,player_w=65):
+        super().__init__(self,player_x,player_y,player_speed,player_l,player_w)
         self.KUP = KUP
         self.KDOWN = KDOWN
     def move(self):
@@ -28,7 +26,8 @@ class Player(GameSprite):
             self.rect.y -=self.speed
         if keys_press[self.KDOWN] and self.rect.y<w_w-80:
             self.rect.y +=self.speed
-
+racket1 = Player(50,0,5,K_w,K_s)
+racket2 = Player(w_l-50,0,K_UP,K_DOWN)
 
 
     
